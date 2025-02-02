@@ -32,7 +32,11 @@ public class Journal
         {
             foreach (var entry in _entries)
             {
-                writer.WriteLine(entry);
+                writer.WriteLine("=====ENTRY=====");
+                writer.WriteLine("Date: 2025-1-30");
+                writer.WriteLine($"PROMPT: {entry._prompt}");
+                writer.WriteLine($"RESPONSE: {entry._response}");
+                writer.WriteLine("================");
             }
         }
         Console.WriteLine("Journal saved successfully!\n");
