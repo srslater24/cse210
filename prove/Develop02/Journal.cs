@@ -25,20 +25,29 @@ public class Journal
     }
     public void SaveToFile()
     {
-        Console.Write("Enter filename to save: ");
-        string filename = Console.ReadLine();
-        
+        string filename = "journal.txt";
         using (StreamWriter writer = new StreamWriter(filename))
         {
-            foreach (var entry in _entries)
+            foreach (Entry entry in _entries)
             {
-                writer.WriteLine("=====ENTRY=====");
-                writer.WriteLine("Date: 2025-1-30");
-                writer.WriteLine($"PROMPT: {entry._prompt}");
-                writer.WriteLine($"RESPONSE: {entry._response}");
-                writer.WriteLine("================");
+                writer.WriteLine($"Date: 2025-1-30|Prompt: {entry._prompt}|Response: {entry._response}");
             }
         }
         Console.WriteLine("Journal saved successfully!\n");
+    }
+    public void Load()
+    {
+        string filename = "journal.txt";
+        string[] lines = File.ReadAllLines(filename);
+        _entries.Clear();
+
+        foreach (string line in lines)
+        {
+            string[] parts = line.Split("|");
+            Entry entry = new Entry();
+            entry._prompt = parts[1];
+            entry._response = parts[2];
+            _entries.Add(entry);
+        }
     }
 }
