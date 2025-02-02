@@ -24,6 +24,14 @@ class Program
             {
                 journal.SaveToFile();
             }
+            else if (cmd == "4")
+            {
+                journal.Load();
+            }
+            else if (cmd == "5")
+            {
+                break;
+            }
         }
     }
 }
