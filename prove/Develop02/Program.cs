@@ -5,27 +5,16 @@ class Program
     static void Main(string[] args)
     {
         Journal journal = new Journal();
+        Menu menu = new Menu();
+        PromptManager prompt_manager = new PromptManager();
         while (true)
         {
-            Menu menu = new Menu();
             menu.Display();
             Console.Write("Enter your response: ");
             string cmd = Console.ReadLine();
             if (cmd == "1")
             {
-                // Get prompt
-                PromptManager prompt_manager = new PromptManager();
-                string currentPrompt = prompt_manager.GetPrompt();
-                // Get response
-                journal._currentPrompt = currentPrompt;
-                string currentResponse = journal.Add_entry();
-                // Turn into entry
-                Entry entry = new Entry();
-                entry._prompt = currentPrompt;
-                entry._response = currentResponse;
-                string fullEntry = entry.Display();
-                // Store entry
-                journal._entries.Add(fullEntry);
+                journal.Add_entry();
             }
             else if (cmd == "2")
             {

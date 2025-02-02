@@ -2,22 +2,25 @@ using System;
 
 public class Journal
 {
-    public List<string> _entries = new List<string> {};
-    public string _currentPrompt;
+    PromptManager promptManager = new PromptManager();
+    public List<Entry> _entries = new List<Entry> {};
     public string _file_name;
-    public string Add_entry()
+    public void Add_entry()
     {
-        Console.WriteLine($"Prompt: {_currentPrompt}");
-        Console.Write("Enter your response: ");
-        string response = Console.ReadLine();
-        return response;
+        Entry entry = new Entry();
+        _entries.Add(entry);
+        entry._prompt = promptManager.GetPrompt();
+        Console.WriteLine(entry._prompt);
+        entry._response = Console.ReadLine();
     }
     public void Display_entries()
     {
         Console.WriteLine("\nJournal Entries:");
         foreach (var entry in _entries)
         {
-            Console.WriteLine(entry);
+            Console.WriteLine("Date: 2025-1-30");
+            Console.WriteLine($"Prompt: {entry._prompt}");
+            Console.WriteLine($"Response: {entry._response}");
         }
     }
     public void SaveToFile()
